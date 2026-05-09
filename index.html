@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Camille Vilain — Data Analyst based in Madrid. SQL, Python, ML, NLP, LLMs.">
+  <title>Camille Vilain | Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ─── TOKENS ─── */
+    :root {
+      --c-ink:   #1a1a18;
+      --c-muted: #6b6b66;
+      --c-faint: #d4d3cc;
+      --c-bg:    #faf9f6;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-mono:    'DM Mono', monospace;
+      --max-w: 860px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--c-ink);
+      background: var(--c-bg);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-faint);
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-name {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--c-ink); }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 5rem 3rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 3rem;
+      background: var(--c-faint);
+    }
+    section { border-bottom: 1px solid var(--c-faint); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ─── HERO ─── */
+    #hero { padding-top: 7rem; padding-bottom: 6rem; }
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .hero-left { flex: 1; }
+
+    /* Photo */
+    .photo-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid var(--c-faint);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+    .photo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: grayscale(100%) contrast(1.08);
+      display: block;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 1.5rem;
+    }
+    h1.hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--c-ink);
+      margin-bottom: 0.2rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--c-muted);
+      margin-bottom: 2.5rem;
+    }
+    .hero-tagline {
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: var(--c-muted);
+      max-width: 460px;
+      border-left: 1px solid var(--c-faint);
+      padding-left: 1.25rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-ink);
+      border: 1px solid var(--c-ink);
+      padding: 0.6rem 1.4rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-cta:hover { background: var(--c-ink); color: var(--c-bg); }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text { font-size: 13px; line-height: 1.85; color: var(--c-muted); }
+    .about-detail { display: flex; flex-direction: column; gap: 1.2rem; }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--c-faint);
+      padding-bottom: 0.8rem;
+    }
+    .detail-key {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+    .detail-val { font-size: 12px; color: var(--c-ink); }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 4rem;
+    }
+    .exp-col-title {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--c-faint);
+    }
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item {
+      position: relative;
+      padding: 0 0 2rem 1.4rem;
+      border-left: 1px solid var(--c-faint);
+    }
+    .tl-item:last-child { border-left: 1px solid transparent; padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -4px;
+      top: 5px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-bg);
+      border: 1px solid var(--c-muted);
+    }
+    .tl-period {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--c-faint);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .tl-role {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--c-ink);
+      line-height: 1.2;
+      margin-bottom: 0.2rem;
+    }
+    .tl-company { font-size: 11px; color: var(--c-muted); margin-bottom: 0.5rem; }
+    .tl-desc { font-size: 11.5px; line-height: 1.7; color: var(--c-muted); }
+    .tl-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--c-faint);
+      padding: 0.15rem 0.45rem;
+      color: var(--c-muted);
+      margin-top: 0.5rem;
+    }
+    .pivot-note {
+      margin-top: 2rem;
+      padding: 1.2rem;
+      border: 1px solid var(--c-faint);
+      font-size: 11.5px;
+      line-height: 1.7;
+      color: var(--c-muted);
+      font-style: italic;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+    }
+    .skill-item {
+      padding: 1.5rem 0 1.5rem 1rem;
+      border-right: 1px solid var(--c-faint);
+      border-bottom: 1px solid var(--c-faint);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .skill-item:nth-child(5n) { border-right: none; }
+    .skill-item:nth-last-child(-n+5) { border-bottom: none; }
+    .skill-name { font-size: 13px; color: var(--c-ink); }
+    .skill-type {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+      background: var(--c-faint);
+      border: 1px solid var(--c-faint);
+    }
+    .project-card {
+      background: var(--c-bg);
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .project-card:hover { background: #f0ede6; }
+    .project-num {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--c-faint);
+      margin-bottom: 1.2rem;
+    }
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--c-ink);
+      margin-bottom: 0.75rem;
+    }
+    .project-desc {
+      font-size: 11.5px;
+      line-height: 1.75;
+      color: var(--c-muted);
+      margin-bottom: 1.5rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--c-faint);
+      padding: 0.2rem 0.5rem;
+      color: var(--c-muted);
+    }
+    .project-arrow {
+      position: absolute;
+      top: 1.8rem;
+      right: 1.8rem;
+      font-size: 16px;
+      color: var(--c-faint);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .project-card:hover .project-arrow { color: var(--c-muted); transform: translate(2px, -2px); }
+
+    /* ─── CONTACT ─── */
+    #contact { text-align: center; }
+    .contact-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--c-ink);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .contact-sub { font-size: 12px; color: var(--c-muted); margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; }
+    .contact-link {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--c-faint);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--c-ink); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--c-faint);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      max-width: 100%;
+    }
+    .footer-text {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-faint);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 680px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 3rem 1.5rem; }
+      .hero-inner { flex-direction: column-reverse; align-items: flex-start; }
+      .photo-circle { width: 90px; height: 90px; }
+      .about-grid,
+      .exp-grid,
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .skill-item:nth-child(2n) { border-right: none; }
+      .skill-item:nth-child(5n) { border-right: 1px solid var(--c-faint); }
+      footer { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-name" href="#hero">Camille Vilain</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Data Analyst · Madrid</p>
+        <h1 class="hero-name">Camille<br>Vilain</h1>
+        <p class="hero-title">Data Analyst</p>
+        <p class="hero-tagline">
+          Turning raw data into decisions.<br>
+          I build tools that make numbers speak — from AI-powered financial systems to conversational analytics.
+        </p>
+        <a class="hero-cta" href="#projects">View projects ↗</a>
+      </div>
+      <!-- Replace photo.jpg with your actual photo filename if different -->
+      <div class="photo-circle">
+        <img src="photo.jpg" alt="Camille Vilain">
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About me</p>
+    <div class="about-grid">
+      <p class="about-text">
+        I'm a data analyst with a background in HR and payroll, currently completing a Master's in Data Analysis &amp; AI at ISDI. After nearly a decade working with people and processes, I'm making a deliberate pivot toward data — bringing with me a strong sense of structure, attention to detail, and deep understanding of how organisations work.
+        <br><br>
+        I build tools where AI and data meet, and I'm open to new opportunities where that combination creates real impact.
+      </p>
+      <div class="about-detail">
+        <div class="detail-row">
+          <span class="detail-key">Background</span>
+          <span class="detail-val">HR &amp; Payroll → Data</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">Currently</span>
+          <span class="detail-val">MSc Data Analysis &amp; AI</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">Focus</span>
+          <span class="detail-val">ML · NLP · LLMs</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">Based in</span>
+          <span class="detail-val">Madrid, Spain</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-key">Available</span>
+          <span class="detail-val">Open to offers</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & EDUCATION -->
+  <section id="experience">
+    <p class="section-label">Experience &amp; Education</p>
+    <div class="exp-grid">
+
+      <div>
+        <p class="exp-col-title">Work experience</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-dot"></span>
+            <p class="tl-period">2026 — Present</p>
+            <p class="tl-role">Global Payroll Lead</p>
+            <p class="tl-company">Seedtag</p>
+            <p class="tl-desc">Leading global payroll operations at one of Europe's leading contextual advertising platforms.</p>
+            <span class="tl-badge">Global payroll · Leadership</span>
+          </div>
+          <div class="tl-item">
+            <span class="tl-dot"></span>
+            <p class="tl-period">2021 — 2025</p>
+            <p class="tl-role">Senior Payroll &amp; Benefits Specialist</p>
+            <p class="tl-company">Fever</p>
+            <p class="tl-desc">Senior specialist managing payroll and benefits in a high-growth global events &amp; entertainment company.</p>
+            <span class="tl-badge">Payroll · Benefits · HRIS</span>
+          </div>
+          <div class="tl-item">
+            <span class="tl-dot"></span>
+            <p class="tl-period">2017 — 2021</p>
+            <p class="tl-role">HR &amp; Payroll</p>
+            <p class="tl-company">Zankyou Weddings</p>
+            <p class="tl-desc">HR and payroll roles in an international wedding platform — first professional steps into people operations.</p>
+            <span class="tl-badge">HR · Payroll · People ops</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="exp-col-title">Education</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-dot"></span>
+            <p class="tl-period">2024 — Present</p>
+            <p class="tl-role">Master in Data Analysis &amp; Artificial Intelligence</p>
+            <p class="tl-company">ISDI · Madrid</p>
+            <p class="tl-desc">Specialisation in machine learning, NLP, and AI-integrated data products. Building a portfolio of applied projects.</p>
+            <span class="tl-badge">ML · NLP · Python · SQL</span>
+          </div>
+          <div class="tl-item">
+            <span class="tl-dot"></span>
+            <p class="tl-period">2015 — 2019</p>
+            <p class="tl-role">Master in Management</p>
+            <p class="tl-company">ICN Business School</p>
+            <p class="tl-desc">Generalist management programme covering strategy, finance, and organisational behaviour.</p>
+            <span class="tl-badge">Management · Strategy · Finance</span>
+          </div>
+        </div>
+        <div class="pivot-note">
+          "Coming from HR gives me something most data analysts don't have: I understand the human side of the data — the processes, the people, and the decisions behind every row."
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Skills</p>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <span class="skill-name">Python</span>
+        <span class="skill-type">Language</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">SQL</span>
+        <span class="skill-type">Language</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">Machine Learning</span>
+        <span class="skill-type">Domain</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">NLP</span>
+        <span class="skill-type">Domain</span>
+      </div>
+      <div class="skill-item">
+        <span class="skill-name">LLMs</span>
+        <span class="skill-type">Domain</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+      <a class="project-card" href="https://github.com/camille-vilain/spotify-wrapped-analytics" target="_blank" rel="noopener">
+        <span class="project-arrow">↗</span>
+        <p class="project-num">01</p>
+        <p class="project-name">Wrapped Analytics</p>
+        <p class="project-desc">Conversational assistant to explore Spotify listening history via natural language. Text-to-code architecture — the LLM generates Python that runs locally on the real dataset.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">GPT-4.1</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">NLP</span>
+        </div>
+      </a>
+      <a class="project-card" href="https://github.com/camille-vilain/financial-analysis-ai" target="_blank" rel="noopener">
+        <span class="project-arrow">↗</span>
+        <p class="project-num">02</p>
+        <p class="project-name">Financial Analysis AI</p>
+        <p class="project-desc">Automated, parametric financial analysis system for any ticker vs. benchmark. Generates quantitative KPIs and an AI executive summary with a single notebook run.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">yfinance</span>
+          <span class="tag">Cohere</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label" style="justify-content: center;">Contact</p>
+    <p class="contact-headline">Let's work<br>together.</p>
+    <p class="contact-sub">Open to full-time roles, freelance projects, and collaborations.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://www.linkedin.com/in/camille-vilain/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="contact-link" href="https://github.com/camille-vilain" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-text">Camille Vilain · 2026</span>
+    <span class="footer-text">Data Analyst</span>
+  </footer>
+
+</body>
+</html>
